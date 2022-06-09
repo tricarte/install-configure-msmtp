@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+sudo debconf-set-selections <<< "msmtp msmtp/apparmor boolean false"
 sudo apt install msmtp msmtp-mta -y
 
 GPGKEY_REALNAME=""
@@ -45,4 +46,4 @@ account default : $ACCOUNTNAME
 
 echo "Enter your password for your SMTP host:"
 echo "Then press Enter again to go to a new line and and CTRL+D to exit."
-gpg --encrypt -o "$ENCRYPTED_PASS_FILE" -r $GPGKEY_EMAIL -
+gpg --encrypt -o "$ENCRYPTED_PASS_FILE" -r "$GPGKEY_EMAIL" -
