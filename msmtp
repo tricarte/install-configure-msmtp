@@ -9,8 +9,8 @@ exit # Uncomment me, after editing
 #---------------------------------------------------------------
 # Edit here
 
-GPGKEY_REALNAME="" # First name and last name
-GPGKEY_EMAIL=""
+GPGKEY_REALNAME="" # First name and last name for the gpg key
+GPGKEY_EMAIL="" # Specify a mail address for the gpg key
 ACCOUNTNAME="" # Enter whatever you want as a config name
 SMTPHOST=""
 FROM="" # A mail address for the FROM field for your sent mails
