@@ -1,18 +1,30 @@
 #!/usr/bin/env bash
 
-sudo debconf-set-selections <<< "msmtp msmtp/apparmor boolean false"
-sudo apt install msmtp msmtp-mta -y
+echo "This script must be edited before using."
 
-GPGKEY_REALNAME=""
+#*********************************
+exit # Uncomment me, after editing
+#*********************************
+
+#---------------------------------------------------------------
+# Edit here
+
+GPGKEY_REALNAME="" # First name and last name
 GPGKEY_EMAIL=""
-
 ACCOUNTNAME="" # Enter whatever you want as a config name
 SMTPHOST=""
-FROM=""
+FROM="" # A mail address for the FROM field for your sent mails
+
+# End of editing
+#---------------------------------------------------------------
 
 ENCRYPTED_PASS_FILE="$HOME/.msmtp.gpg"
 
-gpg --batch --gen-key <<EOF
+sudo debconf-set-selections <<< "msmtp msmtp/apparmor boolean false"
+sudo apt install msmtp msmtp-mta -y
+
+if ! gpg -k "$GPGKEY_EMAIL" > /dev/null 2>&1; then
+    gpg --batch --gen-key <<EOF
 %no-protection
 Key-Type:1
 Key-Length:2048
@@ -22,6 +34,7 @@ Name-Real: $GPGKEY_REALNAME
 Name-Email: $GPGKEY_EMAIL
 Expire-Date:0
 EOF
+fi
 
 echo "
 # Set default values for all following \"account\" sections
